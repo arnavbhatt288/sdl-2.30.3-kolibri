@@ -2,8 +2,8 @@
 #ifndef SDL_kolibriaudio_h_
 #define SDL_kolibriaudio_h_
 
-#define _THIS   SDL_AudioDevice *this
-#define private this->hidden
+#define _THIS   SDL_AudioDevice *_this
+#define private _this->hidden
 
 typedef struct SDL_PrivateAudioData
 {
