@@ -46,49 +46,48 @@
 #define HAVE_TAN         1
 #define HAVE_MALLOC      1
 #define LACKS_SYS_MMAN_H 1
-
-#define HAVE_MALLOC    1
-#define HAVE_CALLOC    1
-#define HAVE_REALLOC   1
-#define HAVE_FREE      1
-#define HAVE_ALLOCA    1
-#define HAVE_QSORT     1
-#define HAVE_BSEARCH   1
-#define HAVE_ABS       1
-#define HAVE_BCOPY     1
-#define HAVE_MEMCPY    1
-#define HAVE_STRTOL    1
-#define HAVE_STRTOUL   1
-#define HAVE_STRTOLL   1
-#define HAVE_STRTOULL  1
-#define HAVE_ATOI      1
-#define HAVE_ATOF      1
-#define HAVE_VSSCANF   1
-#define HAVE_VSNPRINTF 1
-#define HAVE_M_PI      1
-#define HAVE_CEIL      1
-#define HAVE_COPYSIGN  1
-#define HAVE_COS       1
-#define HAVE_COSF      1
-#define HAVE_EXP       1
-#define HAVE_FABS      1
-#define HAVE_FLOOR     1
-#define HAVE_LOG       1
-#define HAVE_LOG10     1
-#define HAVE_LROUND    1
-#define HAVE_LROUNDF   1
-#define HAVE_ROUND     1
-#define HAVE_ROUNDF    1
-#define HAVE_SCALBN    1
-#define HAVE_SIN       1
-#define HAVE_SINF      1
-#define HAVE_SQRT      1
-#define HAVE_SQRTF     1
-#define HAVE_TAN       1
-#define HAVE_TANF      1
-#define HAVE_TRUNC     1
-#define HAVE_TRUNCF    1
-#define HAVE_SETJMP    1
+#define HAVE_MALLOC      1
+#define HAVE_CALLOC      1
+#define HAVE_REALLOC     1
+#define HAVE_FREE        1
+#define HAVE_ALLOCA      1
+#define HAVE_QSORT       1
+#define HAVE_BSEARCH     1
+#define HAVE_ABS         1
+#define HAVE_BCOPY       1
+#define HAVE_MEMCPY      1
+#define HAVE_STRTOL      1
+#define HAVE_STRTOUL     1
+#define HAVE_STRTOLL     1
+#define HAVE_STRTOULL    1
+#define HAVE_ATOI        1
+#define HAVE_ATOF        1
+#define HAVE_VSSCANF     1
+#define HAVE_VSNPRINTF   1
+#define HAVE_M_PI        1
+#define HAVE_CEIL        1
+#define HAVE_COPYSIGN    1
+#define HAVE_COS         1
+#define HAVE_COSF        1
+#define HAVE_EXP         1
+#define HAVE_FABS        1
+#define HAVE_FLOOR       1
+#define HAVE_LOG         1
+#define HAVE_LOG10       1
+#define HAVE_LROUND      1
+#define HAVE_LROUNDF     1
+#define HAVE_ROUND       1
+#define HAVE_ROUNDF      1
+#define HAVE_SCALBN      1
+#define HAVE_SIN         1
+#define HAVE_SINF        1
+#define HAVE_SQRT        1
+#define HAVE_SQRTF       1
+#define HAVE_TAN         1
+#define HAVE_TANF        1
+#define HAVE_TRUNC       1
+#define HAVE_TRUNCF      1
+#define HAVE_SETJMP      1
 
 /* Enable the dummy thread support (src/thread/dummy/\*.c) */
 #define SDL_THREADS_DISABLED 1
@@ -96,8 +95,8 @@
 /* Enable the dummy timer support (src/timer/dummy/\*.c) */
 #define SDL_TIMER_DUMMY 1
 
-/* Enable the dummy video driver (src/video/dummy/\*.c) */
-#define SDL_VIDEO_DRIVER_DUMMY 1
+/* Enable the Kolibri video driver (src/video/kolibri/\*.c) */
+#define SDL_VIDEO_DRIVER_KOLIBRI 1
 
 /* Enable the Kolibri audio driver (src/audio/kolibri/\*.c) */
 #define SDL_AUDIO_DRIVER_KOLIBRI 1

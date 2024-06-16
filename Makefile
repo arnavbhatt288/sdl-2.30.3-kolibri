@@ -80,8 +80,9 @@ video_OBJS = src/video/SDL_blit_0.o src/video/SDL_blit_1.o src/video/SDL_blit_A.
 		src/video/SDL_shape.o src/video/SDL_stretch.o src/video/SDL_surface.o \
 		src/video/SDL_video.o src/video/SDL_yuv.o src/video/yuv2rgb/yuv_rgb_lsx.o \
 		src/video/yuv2rgb/yuv_rgb_sse.o src/video/yuv2rgb/yuv_rgb_std.o \
-		src/video/dummy/SDL_nullevents.o src/video/dummy/SDL_nullframebuffer.o \
-		src/video/dummy/SDL_nullvideo.o
+		src/video/kolibri/SDL_kolibrievents.o src/video/kolibri/SDL_kolibriframebuffer.o \
+		src/video/kolibri/SDL_kolibrivideo.o src/video/kolibri/SDL_kolibriwindow.o \
+		src/video/kolibri/SDL_kolibrimouse.o
 
 curr_OBJS = src/SDL_assert.o src/SDL_dataqueue.o src/SDL_error.o src/SDL_guid.o \
         src/SDL_hints.o src/SDL_list.o src/SDL_log.o src/SDL_utils.o src/SDL.o
