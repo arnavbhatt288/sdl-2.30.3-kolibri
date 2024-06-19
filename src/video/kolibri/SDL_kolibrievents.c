@@ -208,7 +208,7 @@ static SDL_Keycode sdlkeys_e0[0x80] = {
     0,
 };
 
-static SDL_Keymod SDL_KOLIBRI_get_mod_state(void)
+static SDL_Keymod KOLIBRI_get_mod_state(void)
 {
     unsigned controlstate = _ksys_get_control_key_state();
     SDL_Keymod res = 0;
@@ -276,7 +276,7 @@ void KOLIBRI_PumpEvents(_THIS)
                 break;
             }
 
-            mod = SDL_KOLIBRI_get_mod_state();
+            mod = KOLIBRI_get_mod_state();
             if (ext_code == 0xE1)
                 mod &= ~KMOD_CTRL;
             if (!(scancode & 0x80))

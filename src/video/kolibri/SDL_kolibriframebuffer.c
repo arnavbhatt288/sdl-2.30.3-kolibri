@@ -19,7 +19,7 @@ void FreeOldFramebuffer(SDL_Window *window)
     SDL_FreeSurface(data->surface);
 }
 
-int SDL_KOLIBRI_CreateWindowFramebuffer(_THIS, SDL_Window *window, Uint32 *format, void **pixels, int *pitch)
+int KOLIBRI_CreateWindowFramebuffer(_THIS, SDL_Window *window, Uint32 *format, void **pixels, int *pitch)
 {
     SDL_WindowData *data = (SDL_WindowData *)window->driverdata;
     SDL_Surface *surface;
@@ -52,7 +52,7 @@ int SDL_KOLIBRI_CreateWindowFramebuffer(_THIS, SDL_Window *window, Uint32 *forma
     return 0;
 }
 
-int SDL_KOLIBRI_UpdateWindowFramebuffer(_THIS, SDL_Window *window, const SDL_Rect *rects, int numrects)
+int KOLIBRI_UpdateWindowFramebuffer(_THIS, SDL_Window *window, const SDL_Rect *rects, int numrects)
 {
     SDL_WindowData *data = (SDL_WindowData *)window->driverdata;
     SDL_Surface *surface;
@@ -67,7 +67,7 @@ int SDL_KOLIBRI_UpdateWindowFramebuffer(_THIS, SDL_Window *window, const SDL_Rec
     _ksys_draw_bitmap(surface->pixels, 0, 0, surface->w, surface->h);
 }
 
-void SDL_KOLIBRI_DestroyWindowFramebuffer(_THIS, SDL_Window *window)
+void KOLIBRI_DestroyWindowFramebuffer(_THIS, SDL_Window *window)
 {
     SDL_WindowData *data = (SDL_WindowData *)window->driverdata;
     SDL_Surface *surface;

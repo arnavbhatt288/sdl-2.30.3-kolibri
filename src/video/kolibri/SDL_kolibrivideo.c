@@ -87,9 +87,9 @@ static SDL_VideoDevice *KOLIBRI_CreateDevice(void)
     device->free = KOLIBRI_DeleteDevice;
 
     /* Framebuffer */
-    device->CreateWindowFramebuffer = SDL_KOLIBRI_CreateWindowFramebuffer;
-    device->UpdateWindowFramebuffer = SDL_KOLIBRI_UpdateWindowFramebuffer;
-    device->DestroyWindowFramebuffer = SDL_KOLIBRI_DestroyWindowFramebuffer;
+    device->CreateWindowFramebuffer = KOLIBRI_CreateWindowFramebuffer;
+    device->UpdateWindowFramebuffer = KOLIBRI_UpdateWindowFramebuffer;
+    device->DestroyWindowFramebuffer = KOLIBRI_DestroyWindowFramebuffer;
 
     /* "Window" */
     device->CreateSDLWindow = KOLIBRI_CreateWindow;
