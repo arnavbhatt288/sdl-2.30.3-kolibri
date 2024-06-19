@@ -95,8 +95,8 @@ OBJS = $(atomic_OBJS) $(audio_OBJS) $(cpuinfo_OBJS) $(events_OBJS) $(file_OBJS) 
 CFLAGS = -c -O2 -mpreferred-stack-boundary=2 -fno-ident -fomit-frame-pointer -fno-stack-check \
         -fno-stack-protector -mno-stack-arg-probe -fno-exceptions -fno-asynchronous-unwind-tables \
         -ffast-math -mno-ms-bitfields  -fexpensive-optimizations \
-        -D__KOLIBRI__ -D_KOLIBRI -DKOLIBRI -D_KOS_ -D_KOS -DKOS -DPACKAGE=\"SDL\" -DVERSION=\"2.30.3\" \
-        -U_Win32 -UWIN32 -U_WIN32 -U__MINGW32__ -U__WIN32__ \
+        -D__KOLIBRI__ -D_KOLIBRI -DKOLIBRI -D_KOS_ -D_KOS -DKOS -DDEBUG_AUDIO -DDEBUG_VIDEO \
+        -DPACKAGE=\"SDL\" -DVERSION=\"2.30.3\" -U_Win32 -UWIN32 -U_WIN32 -U__MINGW32__ -U__WIN32__ \
         -I../newlib/libc/include/ -Iinclude/ -Iatomic/ -Iaudio/ -Icpuinfo/ -Ievents/ -Ifile/ -Ihaptic/ \
 		-Ihidapi/ -Ijoystick/ -Iloadso/ -Ipower/ -Ifilesystem/ -Ilocale/ -Imisc/ -Irender/ -Isensor/ \
 		-Istdlib/ -Ilibm/ -Ithread/ -Itimer/ -Ivideo/ -I.

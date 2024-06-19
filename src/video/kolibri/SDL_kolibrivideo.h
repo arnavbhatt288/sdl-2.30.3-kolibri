@@ -1,6 +1,6 @@
 
-#ifndef _SDL_kolibri_video_h
-#define _SDL_kolibri_video_h
+#ifndef SDL_kolibrivideo_h
+#define SDL_kolibrivideo_h
 
 typedef struct SDL_VideoData
 {

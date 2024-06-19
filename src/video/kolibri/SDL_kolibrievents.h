@@ -1,6 +1,6 @@
 
-#ifndef SDL_kolibrievents_c_h_
-#define SDL_kolibrievents_c_h_
+#ifndef SDL_kolibrievents_h_
+#define SDL_kolibrievents_h_
 
 #include "../../SDL_internal.h"
 

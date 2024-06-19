@@ -40,6 +40,15 @@ int SDL_KOLIBRI_CreateWindowFramebuffer(_THIS, SDL_Window *window, Uint32 *forma
     *format = surface_format;
     *pixels = surface->pixels;
     *pitch = surface->pitch;
+
+#ifdef DEBUG_VIDEO
+    char *info;
+
+    SDL_asprintf(&info, "width = %d, height = %d, pitch = %d, bpp = %d\n", window->w,
+                 window->h, surface->pitch, surface_format);
+    _ksys_debug_puts(info);
+    SDL_free(info);
+#endif
     return 0;
 }
 

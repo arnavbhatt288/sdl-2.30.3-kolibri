@@ -1,3 +1,4 @@
+
 #include "../../SDL_internal.h"
 
 #ifdef SDL_AUDIO_DRIVER_KOLIBRI
@@ -28,9 +29,7 @@ static void kolibri_audio_callback(void)
     ksys_signal_info_t snd_signal;
     SDL_AudioDevice *_this;
     SDL_AudioCallback callback;
-
     int bPaused;
-    char str[100];
 
     // initialize
     _this = global_device;
@@ -42,8 +41,13 @@ static void kolibri_audio_callback(void)
     }
 
     GetBufferSize(private->hBuff, &_this->spec.size);
-    sprintf(str, "buffer created, size is %d\n", _this->spec.size);
-    _ksys_debug_puts(str);
+
+#ifdef DEBUG_AUDIO
+    char *info;
+    SDL_asprintf(&info, "buffer created, size is %d\n", _this->spec.size);
+    _ksys_debug_puts(info);
+    SDL_free(info);
+#endif
 
     _this->spec.size >>= 1;
     _this->work_buffer = SDL_malloc(_this->spec.size);
@@ -112,7 +116,6 @@ static void KOLIBRIAUDIO_CloseDevice(SDL_AudioDevice *device)
 static int KOLIBRIAUDIO_OpenDevice(_THIS, const char *devname)
 {
     int ver;
-    char buff[100];
 
     if (InitSound(&ver)) {
         SDL_SetError("Error: cannot load drivers!\n");
@@ -209,9 +212,12 @@ static int KOLIBRIAUDIO_OpenDevice(_THIS, const char *devname)
     if (_this->spec.format == AUDIO_U16SYS || _this->spec.format == AUDIO_S16SYS)
         _this->spec.samples /= 2;
 
-    sprintf(buff, "obtained size is %d, samples %d\n", _this->spec.size, _this->spec.samples);
-    _ksys_debug_puts(buff);
-
+#ifdef DEBUG_AUDIO
+    char *info;
+    SDL_asprintf(&info, "obtained size is %d, samples %d\n", _this->spec.size, _this->spec.samples);
+    _ksys_debug_puts(info);
+    SDL_free(info);
+#endif
     return 0;
 }
 
