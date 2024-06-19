@@ -10,6 +10,7 @@
 #include "../SDL_sysvideo.h"
 #include "SDL_video.h"
 
+#include "SDL_kolibriclipboard.h"
 #include "SDL_kolibrievents.h"
 #include "SDL_kolibriframebuffer.h"
 #include "SDL_kolibrimouse.h"
@@ -94,6 +95,11 @@ static SDL_VideoDevice *KOLIBRI_CreateDevice(void)
     device->CreateSDLWindow = KOLIBRI_CreateWindow;
     device->SetWindowTitle = KOLIBRI_SetWindowTitle;
     device->DestroyWindow = KOLIBRI_DestroyWindow;
+
+    /* Clipboard */
+    device->HasClipboardText = KOLIBRI_HasClipboardText;
+    device->GetClipboardText = KOLIBRI_GetClipboardText;
+    device->SetClipboardText = KOLIBRI_SetClipboardText;
 
     /* KolibriOS specific data */
     device->driverdata = data;
