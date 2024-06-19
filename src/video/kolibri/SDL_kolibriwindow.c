@@ -25,14 +25,20 @@ void KOLIBRI_RepaintWnd(_THIS)
 
     win_size_w = window->w + WINDOW_BORDER_W;
     win_size_h = window->h + _ksys_get_skin_height() + WINDOW_BORDER_H;
-    win_pos_x = data->screen_size.x / 2 - win_size_w / 2;
-    win_pos_y = data->screen_size.y / 2 - win_size_h / 2;
 
     _ksys_start_draw();
-    _ksys_create_window(win_pos_x, win_pos_y, win_size_w, win_size_h, window->title, 0, 0x34);
+    _ksys_create_window(window->x, window->y, win_size_w, win_size_h, window->title, 0, 0x34);
     if (wdata->surface->pixels)
         _ksys_draw_bitmap(wdata->surface->pixels, 0, 0, wdata->surface->w, wdata->surface->h);
     _ksys_end_draw();
+}
+
+void KOLIBRI_change_window_size_and_pos(int w, int h, int x, int y)
+{
+    w += WINDOW_BORDER_W;
+    h += _ksys_get_skin_height() + WINDOW_BORDER_H;
+
+    _ksys_change_window(x, y, w, h);
 }
 
 int KOLIBRI_CreateWindow(_THIS, SDL_Window *window)
@@ -56,6 +62,16 @@ int KOLIBRI_CreateWindow(_THIS, SDL_Window *window)
     SDL_SetKeyboardFocus(window);
 
     return 0;
+}
+
+void KOLIBRI_SetWindowPosition(_THIS, SDL_Window *window)
+{
+    KOLIBRI_change_window_size_and_pos(window->w, window->h, window->x, window->y);
+}
+
+void KOLIBRI_SetWindowSize(_THIS, SDL_Window *window)
+{
+    KOLIBRI_change_window_size_and_pos(window->w, window->h, window->x, window->y);
 }
 
 void KOLIBRI_SetWindowTitle(_THIS, SDL_Window *window)
