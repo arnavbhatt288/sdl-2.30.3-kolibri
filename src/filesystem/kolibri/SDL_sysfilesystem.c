@@ -52,4 +52,4 @@ char *SDL_GetPrefPath(const char *org, const char *app)
     return retval;
 }
 
-#endif
+#endif /* SDL_FILESYSTEM_KOLIBRI */

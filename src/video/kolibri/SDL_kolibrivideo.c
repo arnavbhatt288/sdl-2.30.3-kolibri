@@ -115,4 +115,4 @@ VideoBootStrap KOLIBRI_bootstrap = {
     NULL /* no ShowMessageBox implementation */
 };
 
-#endif
+#endif /* SDL_VIDEO_DRIVER_KOLIBRI */

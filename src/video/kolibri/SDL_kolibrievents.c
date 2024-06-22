@@ -354,4 +354,4 @@ void KOLIBRI_PumpEvents(_THIS)
     }
 }
 
-#endif
+#endif /* SDL_VIDEO_DRIVER_KOLIBRI */

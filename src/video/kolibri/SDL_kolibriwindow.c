@@ -86,4 +86,4 @@ void KOLIBRI_DestroyWindow(_THIS, SDL_Window *window)
     SDL_free(window->driverdata);
 }
 
-#endif
+#endif /* SDL_VIDEO_DRIVER_KOLIBRI */

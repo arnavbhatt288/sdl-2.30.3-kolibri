@@ -13,4 +13,4 @@ typedef struct _KOLIBRI_CursorData
 
 extern void KOLIBRI_InitMouse(void);
 
-#endif
+#endif /* SDL_kolibrimouse_h_ */

@@ -51,4 +51,4 @@ void SDL_Delay(Uint32 ms)
     _ksys_delay((uint32_t)(ms / 10 + (ms % 10 > 0)));
 }
 
-#endif
+#endif /* SDL_TIMER_KOLIBRI */

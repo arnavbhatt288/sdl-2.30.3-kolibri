@@ -138,4 +138,4 @@ void KOLIBRI_InitMouse(void)
     SDL_SetDefaultCursor(KOLIBRI_CreateDefaultCursor());
 }
 
-#endif
+#endif /* SDL_VIDEO_DRIVER_KOLIBRI */

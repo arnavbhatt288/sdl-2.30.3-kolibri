@@ -76,4 +76,4 @@ void KOLIBRI_DestroyWindowFramebuffer(_THIS, SDL_Window *window)
     data->surface = NULL;
 }
 
-#endif
+#endif /* SDL_VIDEO_DRIVER_KOLIBRI */

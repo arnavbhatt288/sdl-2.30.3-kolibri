@@ -15,4 +15,4 @@ extern void KOLIBRI_RepaintWnd(_THIS);
 extern void KOLIBRI_SetWindowTitle(_THIS, SDL_Window *window);
 extern void KOLIBRI_DestroyWindow(_THIS, SDL_Window *window);
 
-#endif
+#endif /* SDL_kolibriwindow_h_ */

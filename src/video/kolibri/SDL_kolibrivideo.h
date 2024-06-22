@@ -1,10 +1,10 @@
 
-#ifndef SDL_kolibrivideo_h
-#define SDL_kolibrivideo_h
+#ifndef SDL_kolibrivideo_h_
+#define SDL_kolibrivideo_h_
 
 typedef struct SDL_VideoData
 {
     Uint32 window_id;
 } SDL_VideoData;
 
-#endif
+#endif /* SDL_kolibrivideo_h_ */

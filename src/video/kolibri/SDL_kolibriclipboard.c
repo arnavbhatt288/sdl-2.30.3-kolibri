@@ -57,4 +57,4 @@ SDL_bool KOLIBRI_HasClipboardText(_THIS)
     return result;
 }
 
-#endif
+#endif /* SDL_VIDEO_DRIVER_KOLIBRI */

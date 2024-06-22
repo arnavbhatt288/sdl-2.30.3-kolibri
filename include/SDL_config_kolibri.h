@@ -92,7 +92,7 @@
 /* Enable the dummy thread support (src/thread/dummy/\*.c) */
 #define SDL_THREADS_DISABLED 1
 
-/* Enable the Kolibri timer support (src/timer/dummy/\*.c) */
+/* Enable the Kolibri timer support (src/timer/kolibri/\*.c) */
 #define SDL_TIMER_KOLIBRI 1
 
 /* Enable the Kolibri video driver (src/video/kolibri/\*.c) */

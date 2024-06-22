@@ -236,4 +236,4 @@ AudioBootStrap KOLIBRIAUDIO_bootstrap = {
     KOLIBRIAUDIO_Init, SDL_FALSE
 };
 
-#endif
+#endif /* SDL_AUDIO_DRIVER_KOLIBRI */

@@ -8,4 +8,4 @@ extern int KOLIBRI_CreateWindowFramebuffer(_THIS, SDL_Window *window, Uint32 *fo
 extern int KOLIBRI_UpdateWindowFramebuffer(_THIS, SDL_Window *window, const SDL_Rect *rects, int numrects);
 extern void KOLIBRI_DestroyWindowFramebuffer(_THIS, SDL_Window *window);
 
-#endif
+#endif /* SDL_kolibriframebuffer_h_ */
