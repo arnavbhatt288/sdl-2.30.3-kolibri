@@ -70,7 +70,7 @@ thread_OBJS = src/thread/SDL_thread.o src/thread/generic/SDL_syscond.o \
         src/thread/generic/SDL_sysmutex.o src/thread/generic/SDL_syssem.o \
 		src/thread/generic/SDL_systhread.o src/thread/generic/SDL_systls.o
 
-timer_OBJS = src/timer/SDL_timer.o src/timer/dummy/SDL_systimer.o
+timer_OBJS = src/timer/SDL_timer.o src/timer/kolibri/SDL_systimer.o
 
 video_OBJS = src/video/SDL_blit_0.o src/video/SDL_blit_1.o src/video/SDL_blit_A.o \
         src/video/SDL_blit_auto.o src/video/SDL_blit_copy.o src/video/SDL_blit_N.o \

@@ -92,8 +92,8 @@
 /* Enable the dummy thread support (src/thread/dummy/\*.c) */
 #define SDL_THREADS_DISABLED 1
 
-/* Enable the dummy timer support (src/timer/dummy/\*.c) */
-#define SDL_TIMER_DUMMY 1
+/* Enable the Kolibri timer support (src/timer/dummy/\*.c) */
+#define SDL_TIMER_KOLIBRI 1
 
 /* Enable the Kolibri video driver (src/video/kolibri/\*.c) */
 #define SDL_VIDEO_DRIVER_KOLIBRI 1
