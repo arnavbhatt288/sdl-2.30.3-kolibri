@@ -116,7 +116,7 @@
 /* Enable the stub shared object loader (src/loadso/dummy/\*.c) */
 #define SDL_LOADSO_DISABLED 1
 
-/* Enable the dummy filesystem driver (src/filesystem/dummy/\*.c) */
-#define SDL_FILESYSTEM_DUMMY 1
+/* Enable the Kolibri filesystem driver (src/filesystem/kolibri/\*.c) */
+#define SDL_FILESYSTEM_KOLIBRI 1
 
 #endif /* SDL_config_kolibri_h_ */

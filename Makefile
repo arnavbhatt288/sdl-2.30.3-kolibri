@@ -41,7 +41,7 @@ loadso_OBJS = src/loadso/dummy/SDL_sysloadso.o
 
 power_OBJS = src/power/SDL_power.o
 
-filesystem_OBJS = src/filesystem/dummy/SDL_sysfilesystem.o
+filesystem_OBJS = src/filesystem/kolibri/SDL_sysfilesystem.o
 
 locale_OBJS = src/locale/SDL_locale.o src/locale/dummy/SDL_syslocale.o
 
