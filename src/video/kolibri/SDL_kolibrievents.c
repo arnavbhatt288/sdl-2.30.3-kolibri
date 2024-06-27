@@ -236,8 +236,6 @@ void KOLIBRI_InitOSKeymap(void)
     _ksys_set_key_input_mode(KSYS_KEY_INPUT_MODE_SCANC);
 }
 
-extern void kos_CheckMouseMode(_THIS);
-
 void KOLIBRI_PumpEvents(_THIS)
 {
     SDL_VideoData *data = (SDL_VideoData *)_this->driverdata;
@@ -310,18 +308,17 @@ void KOLIBRI_PumpEvents(_THIS)
             mouse_pos = _ksys_get_mouse_pos(KSYS_MOUSE_WINDOW_POS);
             if (mouse_pos.x >= 0 && mouse_pos.x < window->w && mouse_pos.y >= 0 && mouse_pos.y < window->h || SDL_GetMouse()->relative_mode) {
                 if (SDL_GetMouse()->relative_mode) {
-                    center_pos.x = mouse_pos.x - window->w / 2;
-                    center_pos.y = mouse_pos.y - window->h / 2;
-                    if (center_pos.x || center_pos.y) {
-                        SDL_SendMouseMotion(window, 0, SDL_TRUE, center_pos.x, center_pos.y);
+                    center_pos.x = mouse_pos.x - (window->w / 2);
+                    center_pos.y = mouse_pos.y - (window->h / 2);
+                    SDL_SendMouseMotion(window, 0, SDL_TRUE, center_pos.x, center_pos.y);
 
-                        int top = _ksys_thread_info(&thread_info, KSYS_THIS_SLOT);
-                        if (top == thread_info.pos_in_window_stack) {
-                            int x = thread_info.winx_start + thread_info.clientx + window->w / 2;
-                            int y = thread_info.winy_start + thread_info.clienty + window->h / 2;
-                            _ksys_set_mouse_pos(x, y);
-                        }
+                    int top = _ksys_thread_info(&thread_info, KSYS_THIS_SLOT);
+                    if (top == thread_info.pos_in_window_stack) {
+                        int x = thread_info.winx_start + thread_info.clientx + (window->w / 2);
+                        int y = thread_info.winy_start + thread_info.clienty + (window->h / 2);
+                        _ksys_set_mouse_pos(x, y);
                     }
+
                 } else
                     SDL_SendMouseMotion(window, 0, SDL_FALSE, mouse_pos.x, mouse_pos.y);
 

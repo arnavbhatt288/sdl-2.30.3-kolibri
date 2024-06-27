@@ -5,6 +5,7 @@
 
 #include <sys/ksys.h>
 
+#include "SDL_events.h"
 #include "SDL_hints.h"
 #include "SDL_surface.h"
 
@@ -35,8 +36,11 @@ static SDL_Cursor *KOLIBRI_CreateDefaultCursor(void)
 
     /* Convert default SDL cursor to 32x32 */
     temp = (Uint32 *)SDL_malloc(32 * 32 * 4);
-    if (!temp)
+    if (!temp) {
+        SDL_OutOfMemory();
+        SDL_free(cursor);
         return NULL;
+    }
     for (int i = 0; i < 32; i++) {
         for (int j = 0; j < 32; j++) {
             if (i >= 16 || j >= 16) {
@@ -95,18 +99,6 @@ static int KOLIBRI_ShowCursor(SDL_Cursor *cursor)
     KOLIBRI_CursorData *curdata;
     if (cursor) {
         curdata = (KOLIBRI_CursorData *)cursor->driverdata;
-        if (!curdata->cursor) {
-            if (!curdata->has_null_cursor) {
-                unsigned *u = SDL_malloc(32 * 32 * 4);
-                if (!u)
-                    return 0;
-                SDL_memset(u, 0, 32 * 32 * 4);
-                curdata->null_cursor = _ksys_load_cursor(u, KSYS_CURSOR_INDIRECT);
-                free(u);
-                curdata->has_null_cursor = 1;
-            }
-            curdata->cursor = curdata->null_cursor;
-        }
         _ksys_set_cursor(curdata->cursor);
     }
 
@@ -120,11 +112,50 @@ static void KOLIBRI_FreeCursor(SDL_Cursor *cursor)
     if (cursor) {
         curdata = (KOLIBRI_CursorData *)cursor->driverdata;
         if (curdata) {
-            SDL_free(curdata->cursor);
+            if (curdata->cursor)
+                _ksys_delete_cursor(curdata->cursor);
+            if (curdata->has_null_cursor)
+                _ksys_delete_cursor(curdata->null_cursor);
             SDL_free(curdata);
         }
         SDL_free(cursor);
     }
+}
+
+static int KOLIBRI_SetRelativeMouseMode(SDL_bool enabled)
+{
+    SDL_Window *window = SDL_GetMouseFocus();
+    SDL_Cursor *cursor = SDL_GetCursor();
+    KOLIBRI_CursorData *curdata;
+
+    if (!window || !cursor) {
+        return 0;
+    }
+
+    if (enabled) {
+        ksys_thread_t thread_info;
+        int top = _ksys_thread_info(&thread_info, KSYS_THIS_SLOT);
+        unsigned *u = SDL_calloc(32 * 32, 1);
+
+        if (!u)
+            return 0;
+
+        curdata->null_cursor = _ksys_load_cursor(u, KSYS_CURSOR_INDIRECT);
+        SDL_free(u);
+        curdata->has_null_cursor = 1;
+        _ksys_set_cursor(curdata->null_cursor);
+
+        if (top == thread_info.pos_in_window_stack) {
+            int x = thread_info.winx_start + thread_info.clientx + (window->w / 2);
+            int y = thread_info.winy_start + thread_info.clienty + (window->h / 2);
+            _ksys_set_mouse_pos(x, y);
+        }
+    } else {
+        curdata->has_null_cursor = 0;
+        _ksys_delete_cursor(curdata->null_cursor);
+    }
+
+    return 0;
 }
 
 void KOLIBRI_InitMouse(void)
@@ -134,6 +165,7 @@ void KOLIBRI_InitMouse(void)
     mouse->CreateCursor = KOLIBRI_CreateCursor;
     mouse->ShowCursor = KOLIBRI_ShowCursor;
     mouse->FreeCursor = KOLIBRI_FreeCursor;
+    mouse->SetRelativeMouseMode = KOLIBRI_SetRelativeMouseMode;
 
     SDL_SetDefaultCursor(KOLIBRI_CreateDefaultCursor());
 }
