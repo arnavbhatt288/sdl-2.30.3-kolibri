@@ -240,10 +240,12 @@ void KOLIBRI_PumpEvents(_THIS)
 {
     SDL_VideoData *data = (SDL_VideoData *)_this->driverdata;
     SDL_Window *window = SDL_GetWindowFromID(data->window_id);
+    SDL_WindowData *wdata = (SDL_WindowData *)window->driverdata;
     uint32_t kos_event;
     ksys_pos_t mouse_pos;
     ksys_pos_t center_pos;
     ksys_thread_t thread_info;
+    int top = 0;
     int scancode = 0;
     int pressed = 0;
     SDL_Keycode keycode = SDLK_UNKNOWN;
@@ -251,6 +253,7 @@ void KOLIBRI_PumpEvents(_THIS)
     static int ext_code = 0;
     static uint8_t old_mode = 0;
     static uint32_t old_mouse_but = 0;
+    static SDL_bool restored = SDL_TRUE;
 
     while (1) {
         kos_event = _ksys_check_event();
@@ -258,8 +261,40 @@ void KOLIBRI_PumpEvents(_THIS)
         case KSYS_EVENT_NONE:
             return;
         case KSYS_EVENT_REDRAW:
+        {
+            top = _ksys_thread_info(&thread_info, KSYS_THIS_SLOT);
+            if (top == thread_info.pos_in_window_stack) {
+                int win_size_w = thread_info.winx_size;
+                int win_size_h = thread_info.winy_size;
+
+                if (wdata->skin == 0x01) {
+                    win_size_w++;
+                    win_size_h++;
+                } else {
+                    win_size_w -= (TRUE_WIN_WIDTH + 1);
+                    win_size_h -= (TRUE_WIN_HEIGHT + 1);
+                }
+
+                if (thread_info.winx_start != window->x || thread_info.winy_start != window->y)
+                    SDL_SendWindowEvent(window, SDL_WINDOWEVENT_MOVED, thread_info.winx_start, thread_info.winy_start);
+                if (win_size_w != window->w || win_size_h != window->h)
+                    SDL_SendWindowEvent(window, SDL_WINDOWEVENT_RESIZED, win_size_w, win_size_h);
+            }
+
+            if (thread_info.window_state & 0x01) {
+                SDL_SendWindowEvent(window, SDL_WINDOWEVENT_MAXIMIZED, 0, 0);
+                restored = SDL_FALSE;
+            } else if (thread_info.window_state & 0x02) {
+                SDL_SendWindowEvent(window, SDL_WINDOWEVENT_MINIMIZED, 0, 0);
+                restored = SDL_FALSE;
+            } else if (!restored) {
+                SDL_SendWindowEvent(window, SDL_WINDOWEVENT_RESTORED, 0, 0);
+                restored = SDL_TRUE;
+            }
+
             KOLIBRI_RepaintWnd(_this);
             break;
+        }
         case KSYS_EVENT_KEY:
             scancode = _ksys_get_key().code;
             if (scancode == 0xE0 || scancode == 0xE1) {
@@ -300,8 +335,10 @@ void KOLIBRI_PumpEvents(_THIS)
             SDL_SendKeyboardKey(pressed, SDL_GetScancodeFromKey(keycode));
             break;
         case KSYS_EVENT_BUTTON:
-            if (_ksys_get_button() == 1)
+            if (_ksys_get_button() == 1) {
+                SDL_SendWindowEvent(window, SDL_WINDOWEVENT_CLOSE, 0, 0);
                 exit(0);
+            }
             break;
         case KSYS_EVENT_MOUSE:
         {
@@ -312,7 +349,7 @@ void KOLIBRI_PumpEvents(_THIS)
                     center_pos.y = mouse_pos.y - (window->h / 2);
                     SDL_SendMouseMotion(window, 0, SDL_TRUE, center_pos.x, center_pos.y);
 
-                    int top = _ksys_thread_info(&thread_info, KSYS_THIS_SLOT);
+                    top = _ksys_thread_info(&thread_info, KSYS_THIS_SLOT);
                     if (top == thread_info.pos_in_window_stack) {
                         int x = thread_info.winx_start + thread_info.clientx + (window->w / 2);
                         int y = thread_info.winy_start + thread_info.clienty + (window->h / 2);

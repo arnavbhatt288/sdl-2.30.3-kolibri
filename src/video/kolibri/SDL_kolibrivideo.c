@@ -35,9 +35,9 @@ int KOLIBRI_VideoInit(_THIS)
 
     /* Use 24-bpp desktop mode */
     mode.format = SDL_PIXELFORMAT_RGB24;
-    mode.w = screen_size.x;
-    mode.h = screen_size.y;
-    mode.refresh_rate = 0;
+    mode.w = screen_size.x + 1;
+    mode.h = screen_size.y + 1;
+    mode.refresh_rate = 60;
     mode.driverdata = NULL;
     if (SDL_AddBasicVideoDisplay(&mode) < 0)
         return -1;

@@ -12,9 +12,6 @@
 #include "SDL_kolibrivideo.h"
 #include "SDL_kolibriwindow.h"
 
-#define WINDOW_BORDER_H 4
-#define WINDOW_BORDER_W 9
-
 void KOLIBRI_RepaintWnd(_THIS)
 {
     SDL_VideoData *data = (SDL_VideoData *)_this->driverdata;
@@ -23,8 +20,8 @@ void KOLIBRI_RepaintWnd(_THIS)
     int win_pos_x, win_pos_y;
     int win_size_w, win_size_h;
 
-    win_size_w = window->w + WINDOW_BORDER_W;
-    win_size_h = window->h + _ksys_get_skin_height() + WINDOW_BORDER_H;
+    win_size_w = window->w + TRUE_WIN_WIDTH;
+    win_size_h = window->h + TRUE_WIN_HEIGHT;
 
     _ksys_start_draw();
     _ksys_create_window(window->x, window->y, win_size_w, win_size_h, window->title, 0, 0x34);
@@ -35,8 +32,8 @@ void KOLIBRI_RepaintWnd(_THIS)
 
 void KOLIBRI_change_window_size_and_pos(int w, int h, int x, int y)
 {
-    w += WINDOW_BORDER_W;
-    h += _ksys_get_skin_height() + WINDOW_BORDER_H;
+    w += TRUE_WIN_WIDTH;
+    h += TRUE_WIN_HEIGHT;
 
     _ksys_change_window(x, y, w, h);
 }
