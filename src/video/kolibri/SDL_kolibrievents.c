@@ -248,6 +248,7 @@ void KOLIBRI_PumpEvents(_THIS)
     int top = 0;
     int scancode = 0;
     int pressed = 0;
+    int win_size_w, win_size_h;
     SDL_Keycode keycode = SDLK_UNKNOWN;
     SDL_Keymod mod = 0;
     static int ext_code = 0;
@@ -262,24 +263,19 @@ void KOLIBRI_PumpEvents(_THIS)
             return;
         case KSYS_EVENT_REDRAW:
         {
-            top = _ksys_thread_info(&thread_info, KSYS_THIS_SLOT);
-            if (top == thread_info.pos_in_window_stack) {
-                int win_size_w = thread_info.winx_size;
-                int win_size_h = thread_info.winy_size;
+            _ksys_thread_info(&thread_info, KSYS_THIS_SLOT);
 
-                if (wdata->skin == 0x01) {
-                    win_size_w++;
-                    win_size_h++;
-                } else {
-                    win_size_w -= (TRUE_WIN_WIDTH + 1);
-                    win_size_h -= (TRUE_WIN_HEIGHT + 1);
-                }
-
-                if (thread_info.winx_start != window->x || thread_info.winy_start != window->y)
-                    SDL_SendWindowEvent(window, SDL_WINDOWEVENT_MOVED, thread_info.winx_start, thread_info.winy_start);
-                if (win_size_w != window->w || win_size_h != window->h)
-                    SDL_SendWindowEvent(window, SDL_WINDOWEVENT_RESIZED, win_size_w, win_size_h);
+            win_size_w = thread_info.winx_size + 1;
+            win_size_h = thread_info.winy_size + 1;
+            if (wdata->skin != 0x01) {
+                win_size_w -= TRUE_WIN_WIDTH;
+                win_size_h -= TRUE_WIN_HEIGHT;
             }
+
+            if (thread_info.winx_start != window->x || thread_info.winy_start != window->y)
+                SDL_SendWindowEvent(window, SDL_WINDOWEVENT_MOVED, thread_info.winx_start, thread_info.winy_start);
+            if (win_size_w != window->w || win_size_h != window->h)
+                SDL_SendWindowEvent(window, SDL_WINDOWEVENT_RESIZED, win_size_w, win_size_h);
 
             if (thread_info.window_state & 0x01) {
                 SDL_SendWindowEvent(window, SDL_WINDOWEVENT_MAXIMIZED, 0, 0);
@@ -344,6 +340,7 @@ void KOLIBRI_PumpEvents(_THIS)
         {
             mouse_pos = _ksys_get_mouse_pos(KSYS_MOUSE_WINDOW_POS);
             if (mouse_pos.x >= 0 && mouse_pos.x < window->w && mouse_pos.y >= 0 && mouse_pos.y < window->h || SDL_GetMouse()->relative_mode) {
+
                 if (SDL_GetMouse()->relative_mode) {
                     center_pos.x = mouse_pos.x - (window->w / 2);
                     center_pos.y = mouse_pos.y - (window->h / 2);

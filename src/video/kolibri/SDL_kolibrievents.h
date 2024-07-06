@@ -4,7 +4,7 @@
 
 #include "../../SDL_internal.h"
 
-extern void KOLIBRI_InitOSKeymap(void);
-extern void KOLIBRI_PumpEvents(_THIS);
+void KOLIBRI_InitOSKeymap(void);
+void KOLIBRI_PumpEvents(_THIS);
 
 #endif /* SDL_kolibrievents_h_ */

@@ -23,7 +23,7 @@ int KOLIBRI_CreateWindowFramebuffer(_THIS, SDL_Window *window, Uint32 *format, v
 {
     SDL_WindowData *data = (SDL_WindowData *)window->driverdata;
     SDL_Surface *surface;
-    const Uint32 surface_format = SDL_PIXELFORMAT_RGB24;
+    const Uint32 surface_format = SDL_PIXELFORMAT_BGR24;
     int w, h;
 
     /* Free the old framebuffer surface */

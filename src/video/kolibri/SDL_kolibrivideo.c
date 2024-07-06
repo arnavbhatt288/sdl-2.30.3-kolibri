@@ -34,7 +34,7 @@ int KOLIBRI_VideoInit(_THIS)
     screen_size = _ksys_screen_size();
 
     /* Use 24-bpp desktop mode */
-    mode.format = SDL_PIXELFORMAT_RGB24;
+    mode.format = SDL_PIXELFORMAT_BGR24;
     mode.w = screen_size.x + 1;
     mode.h = screen_size.y + 1;
     mode.refresh_rate = 60;
@@ -95,6 +95,13 @@ static SDL_VideoDevice *KOLIBRI_CreateDevice(void)
 
     /* "Window" */
     device->CreateSDLWindow = KOLIBRI_CreateWindow;
+    device->MaximizeWindow = KOLIBRI_MaximizeWindow;
+    device->MinimizeWindow = KOLIBRI_MinimizeWindow;
+    device->RestoreWindow = KOLIBRI_RestoreWindow;
+    device->SetWindowFullscreen = KOLIBRI_SetWindowFullscreen;
+    device->SetWindowPosition = KOLIBRI_SetWindowPosition;
+    device->SetWindowResizable = KOLIBRI_SetWindowResizable;
+    device->SetWindowSize = KOLIBRI_SetWindowSize;
     device->SetWindowTitle = KOLIBRI_SetWindowTitle;
     device->DestroyWindow = KOLIBRI_DestroyWindow;
 
