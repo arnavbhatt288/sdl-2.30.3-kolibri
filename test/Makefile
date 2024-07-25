@@ -4,16 +4,16 @@ OBJCOPY = kos32-objcopy
 
 SDK_DIR = ../../..
 LDFLAGS = -nostdlib -static --image-base 0 -T $(SDK_DIR)/sources/newlib/app.lds --subsystem native
-CFLAGS = -c -fno-ident -O2 -fomit-frame-pointer -fno-ident -U__WIN32__ -U_Win32 -U_WIN32 -U__MINGW32__ -UWIN32 -D_KOLIBRI -DNO_ZIP -DPERFORMANCE 
+CFLAGS = -c -fno-ident -O2 -fomit-frame-pointer -U__WIN32__ -U_Win32 -U_WIN32 -U__MINGW32__ -UWIN32
 LIBS = -lSDL2test -lSDL2 -lgcc -lc.dll -lc -lsound
 
 INCLUDES = -I $(SDK_DIR)/sources/newlib/libc/include -I ../include/
 LIBPATH = -L $(SDK_DIR)/lib -L /home/autobuild/tools/win32/mingw32/lib
 
-all: checkkeys loopwave testatomic testaudioinfo testbounds testcustomcursor testdisplayinfo testdraw2 testdrawchessboard testfile \
-	   testfilesystem testgeometry testiconv testime testintersections testkeys testmouse testmultiaudio testoverlay2 \
-		 testplatform testqsort testrelative testrendercopyex testrendertarget testresample testscale testshape testsprite2 \
-		 testspriteminimal teststreaming testver testviewport testwm2 testyuv
+all:	checkkeys loopwave loopwavequeue testatomic testaudioinfo testbounds testcustomcursor testdisplayinfo testdraw2 testdrawchessboard testfile \
+		testfilesystem testgeometry testiconv testime testintersections testkeys testmouse testmultiaudio testoverlay2 \
+		testplatform testqsort testrelative testrendercopyex testrendertarget testresample testscale testshape testsprite2 \
+		testspriteminimal teststreaming testver testviewport testwm2 testyuv
 
 checkkeys: checkkeys.o
 	$(LD) $(LDFLAGS) $(LIBPATH) -o $@ $^ $(LIBS)
@@ -157,10 +157,10 @@ testyuv: testyuv.o testyuv_cvt.o
 
 %.o : %.c Makefile
 	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $<
- 
+
 clean:
 	rm -f *.o
-	rm -f checkkeys loopwave testatomic testaudioinfo testbounds testcustomcursor testdisplayinfo testdraw2 testdrawchessboard testfile \
+	rm -f checkkeys loopwave loopwavequeue testatomic testaudioinfo testbounds testcustomcursor testdisplayinfo testdraw2 testdrawchessboard testfile \
 	testfilesystem testgeometry testiconv testime testintersections testkeys testmouse testmultiaudio testoverlay2 \
 	testplatform testqsort testrelative testrendercopyex testrendertarget testresample testscale testshape testsprite2 \
 	testspriteminimal teststreaming testver testviewport testwm2 testyuv
